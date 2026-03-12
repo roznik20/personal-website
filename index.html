@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikita Rozanov — Physics &amp; CS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- READING PROGRESS -->
+  <div id="progress-bar"></div>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">N. Rozanov</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-label">Honours Physics &middot; McGill University</p>
+      <h1>Nikita<br><em>Rozanov</em></h1>
+      <p class="hero-desc">
+        Physicist and programmer exploring the intersection of high-energy theory and
+        computational simulation. Based in Montr&eacute;al.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-fill">Get in touch</a>
+        <a href="#about" class="btn">Learn more</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="particle-wrap">
+        <canvas id="particleCanvas"></canvas>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">U1</div>
+          <div class="stat-label">McGill Year</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">IB</div>
+          <div class="stat-label">Distinction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">HEP</div>
+          <div class="stat-label">Research Focus</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Languages</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2>About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm a <strong>second-year Honours Physics student</strong> at McGill University,
+            considering a joint Honours in Physics and Computer Science. My academic interest
+            centres on <strong>high-energy and particle physics</strong>, particularly the
+            theoretical and computational tools used to model quantum chromodynamics and
+            heavy-ion collisions.
+          </p>
+          <p>
+            I have an upcoming internship at <strong>Mission Space in Luxembourg</strong>,
+            working on aerospace and space technology projects. Before McGill, I attended
+            <strong>Aiglon College in Switzerland</strong>, where I graduated with Honours
+            and Distinction in the IB, earning a departmental award in Computer Science.
+          </p>
+          <p>
+            Outside of physics I enjoy skiing, astrophotography, and exploring new places.
+          </p>
+        </div>
+        <div class="reveal">
+          <p class="sub-label">Research Interests</p>
+          <ul class="interests-list">
+            <li>High-energy &amp; particle physics</li>
+            <li>Relativistic heavy-ion collisions</li>
+            <li>Quantum chromodynamics (QCD)</li>
+            <li>Numerical simulation methods</li>
+            <li>Statistical data analysis</li>
+            <li>Astrophotography &amp; observational astronomy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2>Education &amp; Experience</h2>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-main">
+          <p class="edu-school">McGill University</p>
+          <p class="edu-degree">B.Sc. (Honours) Physics</p>
+          <p class="edu-details">
+            Exploring joint Honours in Physics &amp; Computer Science. Coursework includes
+            Honours Classical Mechanics, Ordinary Differential Equations, Complex Variables,
+            Signal Processing, and Discrete Mathematics.
+          </p>
+          <span class="edu-badge">Active</span>
+        </div>
+        <div class="edu-dates">Sep 2024 &ndash; Jun 2028<br>Montr&eacute;al, Canada</div>
+      </div>
+
+
+<div class="edu-item reveal">
+        <div class="edu-main">
+          <p class="edu-school">Aiglon College</p>
+          <p class="edu-degree">IGCSE &amp; International Baccalaureate (IB)</p>
+          <p class="edu-details">
+            Graduated with Honours and Distinction. Departmental prize in Computer Science.
+            HL subjects: Physics, Mathematics: Analysis &amp; Approaches, Computer Science.
+          </p>
+          <span class="edu-badge">Honours &amp; Distinction</span>
+        </div>
+        <div class="edu-dates">Sep 2020 &ndash; Jun 2024<br>Switzerland</div>
+      </div>
+
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2>Skills</h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+          <p class="skill-card-title">Programming</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Java</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <p class="skill-card-title">Scientific Libraries</p>
+          <div class="tags">
+            <span class="tag">NumPy</span>
+            <span class="tag">SciPy</span>
+            <span class="tag">pandas</span>
+            <span class="tag">Matplotlib</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <p class="skill-card-title">Tools &amp; Typesetting</p>
+          <div class="tags">
+            <span class="tag">Git</span>
+            <span class="tag">LaTeX</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">Overleaf</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <p class="skill-card-title">Methods</p>
+          <div class="tags">
+            <span class="tag">Data Analysis</span>
+            <span class="tag">Chi-squared Fitting</span>
+            <span class="tag">Statistical Inference</span>
+            <span class="tag">Numerical Simulation</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <p class="skill-card-title">Languages</p>
+          <div class="tags">
+            <span class="tag">English — Fluent</span>
+            <span class="tag">Russian — Fluent</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <p class="skill-card-title">Concepts</p>
+          <div class="tags">
+            <span class="tag">OOP</span>
+            <span class="tag">Algorithms</span>
+            <span class="tag">Classical Mechanics</span>
+            <span class="tag">Quantum Mechanics</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2>Projects</h2>
+      </div>
+      <div class="projects-list">
+
+        <div class="project-item reveal">
+          <span class="project-year">2026</span>
+          <div>
+            <p class="project-title">Physics Hackathon — Pendulum &amp; Spring Simulation</p>
+            <p class="project-desc">
+              Built an interactive physics engine in Python for the McGill Physics Hackathon,
+              simulating coupled pendulum and spring dynamics in real time. Focused on accurate
+              numerical integration of equations of motion.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Numerical Methods</span>
+              <span class="tag">Game Physics</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-item reveal">
+          <span class="project-year">2024</span>
+          <div>
+            <p class="project-title">Game Design Club — Group Projects</p>
+            <p class="project-desc">
+              Led cross-year game development projects as Head of the Game Design Club,
+              coordinating teams and teaching Python and OOP fundamentals to junior students.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">OOP</span>
+              <span class="tag">Team Leadership</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+      <div class="section-header reveal">
+        <span class="section-num contact-num">05</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="contact-grid">
+        <p class="contact-intro reveal">
+          I'm open to research collaborations and conversations about high-energy physics,
+          scientific computing, or aerospace. Feel free to reach out.
+        </p>
+        <ul class="contact-links reveal">
+          <li>
+            <a href="mailto:roznik2020@gmail.com">
+              <span>
+                <span class="link-type">Email</span><br>
+                roznik2020@gmail.com
+              </span>
+              <span class="link-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com" target="_blank" rel="noopener">
+              <span>
+                <span class="link-type">LinkedIn</span><br>
+                linkedin.com/in/nikita-rozanov
+              </span>
+              <span class="link-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com" target="_blank" rel="noopener">
+              <span>
+                <span class="link-type">GitHub</span><br>
+                github.com/nikita-rozanov
+              </span>
+              <span class="link-arrow">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+12633627797">
+              <span>
+                <span class="link-type">Phone</span><br>
+                +1 (263) 362-7797
+              </span>
+              <span class="link-arrow">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Nikita Rozanov &middot; McGill University &middot; 2026</span>
+    <span>Built with HTML &amp; CSS</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
