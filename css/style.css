@@ -538,44 +538,6 @@ footer span {
   transition: width 0.1s linear;
 }
 
-/* ── CUSTOM CURSOR ───────────────────────────────── */
-#cursor-dot {
-  position: fixed;
-  width: 5px; height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.05s, background 0.2s;
-}
-
-#cursor-ring {
-  position: fixed;
-  width: 28px; height: 28px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s, height 0.25s, border-color 0.2s, opacity 0.2s;
-  opacity: 0.5;
-}
-
-body.cursor-hover #cursor-ring {
-  width: 48px; height: 48px;
-  opacity: 0.8;
-  border-color: var(--red);
-}
-
-body.cursor-hover #cursor-dot {
-  background: var(--red);
-}
-
-@media (hover: none) {
-  #cursor-dot, #cursor-ring { display: none; }
-}
-
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 820px) {
   #hero {

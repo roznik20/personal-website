@@ -87,37 +87,6 @@ function drawParticles() {
 }
 drawParticles();
 
-// ── CUSTOM CURSOR ─────────────────────────────────
-const cursorDot  = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
-
-let cx = 0, cy = 0; // dot (snappy)
-let rx = 0, ry = 0; // ring (lerped)
-
-document.addEventListener('mousemove', e => {
-  cx = e.clientX;
-  cy = e.clientY;
-});
-
-function animateCursor() {
-  // dot follows immediately
-  cursorDot.style.left = cx + 'px';
-  cursorDot.style.top  = cy + 'px';
-  // ring lags behind
-  rx += (cx - rx) * 0.12;
-  ry += (cy - ry) * 0.12;
-  cursorRing.style.left = rx + 'px';
-  cursorRing.style.top  = ry + 'px';
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-// expand ring on interactive elements
-document.querySelectorAll('a, button, .skill-card, .edu-item, .project-item').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
-
 // ── READING PROGRESS BAR ──────────────────────────
 const progressBar = document.getElementById('progress-bar');
 
