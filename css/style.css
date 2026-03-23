@@ -35,6 +35,33 @@
   background: #070a0f;
 }
 
+/* contact section always uses light text — fix dark mode variable bleed */
+[data-theme="dark"] .contact-section,
+[data-theme="dark"] .contact-section h2,
+[data-theme="dark"] .contact-links a {
+  color: #e8e0d0;
+}
+
+[data-theme="dark"] .contact-intro {
+  color: rgba(232,224,208,0.72);
+}
+
+[data-theme="dark"] .link-type {
+  color: rgba(232,224,208,0.45);
+}
+
+[data-theme="dark"] .link-arrow {
+  color: rgba(232,224,208,0.25);
+}
+
+[data-theme="dark"] .contact-links li {
+  border-bottom-color: rgba(232,224,208,0.1);
+}
+
+[data-theme="dark"] footer span {
+  color: rgba(232,224,208,0.3);
+}
+
 [data-theme="dark"] .nav-links {
   background: rgba(15,17,23,0.97);
 }
