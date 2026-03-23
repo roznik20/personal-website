@@ -1,3 +1,28 @@
+// ── THEME TOGGLE ──────────────────────────────────
+(function () {
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.dataset.theme = saved;
+})();
+
+const themeToggle = document.getElementById('theme-toggle');
+
+function updateToggleLabel() {
+  if (!themeToggle) return;
+  const dark = document.documentElement.dataset.theme === 'dark';
+  themeToggle.textContent = dark ? 'Light' : 'Dark';
+}
+
+updateToggleLabel();
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('theme', next);
+    updateToggleLabel();
+  });
+}
+
 // ── PARTICLE CANVAS ───────────────────────────────
 const canvas = document.getElementById('particleCanvas');
 if (canvas) {

@@ -15,6 +15,53 @@
   --nav-h:   58px;
 }
 
+/* ── DARK MODE ───────────────────────────────────── */
+[data-theme="dark"] {
+  --ink:     #e8e0d0;
+  --paper:   #0f1117;
+  --surface: #171d27;
+  --accent:  #6b9ee8;
+  --red:     #e06b5a;
+  --muted:   #8a8276;
+  --rule:    rgba(232,224,208,0.1);
+}
+
+[data-theme="dark"] #navbar {
+  background: rgba(15,17,23,0.94);
+}
+
+[data-theme="dark"] .contact-section,
+[data-theme="dark"] footer {
+  background: #070a0f;
+}
+
+[data-theme="dark"] .nav-links {
+  background: rgba(15,17,23,0.97);
+}
+
+body, #navbar, section, .skill-card, footer {
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+/* ── THEME TOGGLE ────────────────────────────────── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.3rem 0.7rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
