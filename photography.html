@@ -317,6 +317,7 @@
     <div id="lightbox-caption">
       <strong id="lb-title"></strong>
       <span id="lb-meta"></span>
+      <span id="lb-exif" style="display:block;margin-top:0.3rem;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.08em;color:rgba(245,240,232,0.3);"></span>
     </div>
   </div>
 
@@ -458,6 +459,7 @@
       document.getElementById('lightbox-img').alt = p.title || '';
       document.getElementById('lb-title').textContent = p.title || '';
       document.getElementById('lb-meta').textContent = [p.location, p.date].filter(Boolean).join(' · ');
+      document.getElementById('lb-exif').textContent = [p.camera, p.exif].filter(Boolean).join(' — ');
     }
 
     document.getElementById('lightbox-close').addEventListener('click', closeLightbox);

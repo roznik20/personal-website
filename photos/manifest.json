@@ -1,9 +1,20 @@
 [
   {
-    "file": "example.jpg",
-    "title": "Example Photo",
-    "location": "Montreal, Canada",
+    "file": "_DSF5827 1.jpg",
+    "title": "",
+    "location": "",
     "date": "2026-03",
-    "category": "astrophotography"
+    "category": "",
+    "camera": "Fujifilm X100VI",
+    "exif": "23mm · f/5.6 · 1/800s · ISO 250"
+  },
+  {
+    "file": "_DSF5838 1.jpg",
+    "title": "",
+    "location": "",
+    "date": "2026-03",
+    "category": "",
+    "camera": "Fujifilm X100VI",
+    "exif": "23mm · f/3.2 · 1/180s · ISO 250"
   }
 ]
