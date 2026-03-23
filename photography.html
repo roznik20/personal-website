@@ -428,7 +428,7 @@
         const card = document.createElement('div');
         card.className = 'photo-card';
         card.innerHTML = `
-          <img src="photos/${photo.file}" alt="${photo.title || ''}" loading="lazy" />
+          <img src="photos/${encodeURIComponent(photo.file)}" alt="${photo.title || ''}" loading="lazy" />
           <div class="photo-card-overlay">
             <div class="photo-card-info">
               ${photo.title ? `<div class="photo-card-title">${photo.title}</div>` : ''}
@@ -455,7 +455,7 @@
 
     function updateLightbox() {
       const p = allPhotos[currentIndex];
-      document.getElementById('lightbox-img').src = `photos/${p.file}`;
+      document.getElementById('lightbox-img').src = `photos/${encodeURIComponent(p.file)}`;
       document.getElementById('lightbox-img').alt = p.title || '';
       document.getElementById('lb-title').textContent = p.title || '';
       document.getElementById('lb-meta').textContent = [p.location, p.date].filter(Boolean).join(' · ');
