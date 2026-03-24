@@ -70,6 +70,20 @@ body, #navbar, section, .skill-card, footer {
   transition: background 0.25s, color 0.25s, border-color 0.25s;
 }
 
+/* ── PHOTOGRAPHY NAV LINK ────────────────────────── */
+.nav-links a.nav-external {
+  border: 1px solid var(--rule);
+  padding: 0.2rem 0.6rem;
+  color: var(--accent);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.nav-links a.nav-external:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+
 /* ── THEME TOGGLE ────────────────────────────────── */
 .theme-toggle {
   background: none;
