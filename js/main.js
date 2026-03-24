@@ -110,7 +110,7 @@ if (canvas) {
       // Mouse packet — fades in with mousePresence
       if (mousePresence > 0) {
         const dm   = x - mouseNX;
-        const envm = mousePresence * 1.4 * Math.exp(-dm * dm / (2 * sigma_m * sigma_m));
+        const envm = mousePresence * 0.65 * Math.exp(-dm * dm / (2 * sigma_m * sigma_m));
         re += envm * Math.cos(k_mouse * dm);
         im += envm * Math.sin(k_mouse * dm);
       }
