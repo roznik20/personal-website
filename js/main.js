@@ -54,106 +54,111 @@ if (canvas) {
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
+  // Render at half resolution for performance, then scale up
+  const STEP = 3;
   let startTime = null;
+  let runningMax = 1;
 
-  function drawWavefunction(timestamp) {
+  function drawWavefunction2D(timestamp) {
     if (!startTime) startTime = timestamp;
     const t = (timestamp - startTime) / 1000;
 
     const W = canvas.width, H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-
     const dark = document.documentElement.dataset.theme === 'dark';
-    const rgb  = dark ? '140,190,255' : '26,61,143';
 
-    // Coherent state parameters
-    const omega = 0.65;
-    const alpha = 0.30; // amplitude of oscillation
-    const x0    = 0.5 + alpha * Math.cos(omega * t);
-    const p0    = -alpha * omega * Math.sin(omega * t);
-    const sigma = 0.09;
-    const k0    = p0 * 42;
-    const phase_drift = t * 1.2;
+    // 3 point sources orbiting the centre at 120° apart
+    // — superposition creates a rotating interference pattern
+    const R     = 0.20;
+    const speed = 0.30;
+    const k     = 20;   // spatial wave number
+    const omega = 3.5;  // temporal frequency
 
-    const N   = 500;
-    const yC  = H * 0.54;
-    const amp = H * 0.34;
+    const sources = [0, 1, 2].map(i => ({
+      x: 0.5 + R * Math.cos(speed * t + i * 2.094),
+      y: 0.5 + R * Math.sin(speed * t + i * 2.094),
+    }));
 
-    const reP = [], imP = [], pTop = [], pBot = [];
+    const imageData = ctx.createImageData(W, H);
+    const d = imageData.data;
 
-    for (let i = 0; i <= N; i++) {
-      const x   = i / N;
-      const dx  = x - x0;
-      const env = Math.exp(-dx * dx / (2 * sigma * sigma));
-      const phi = k0 * dx - phase_drift;
-      const re  = env * Math.cos(phi);
-      const im  = env * Math.sin(phi);
-      const pr  = env * env;
-      const px  = x * W;
-      reP.push( [px, yC - re * amp] );
-      imP.push( [px, yC - im * amp] );
-      pTop.push([px, yC - pr * amp * 0.88]);
-      pBot.push([px, yC + pr * amp * 0.88]);
+    // Background colour
+    const bgR = dark ?  15 : 245;
+    const bgG = dark ?  17 : 240;
+    const bgB = dark ?  23 : 232;
+
+    // High-intensity target colour
+    const hiR = dark ? 140 :  26;
+    const hiG = dark ? 190 :  61;
+    const hiB = dark ? 255 : 143;
+
+    // First pass — compute |ψ|² and track max
+    const cols  = Math.ceil(W / STEP);
+    const rows  = Math.ceil(H / STEP);
+    const vals  = new Float32Array(cols * rows);
+    let frameMax = 0;
+
+    for (let row = 0; row < rows; row++) {
+      const y = (row * STEP + STEP / 2) / H;
+      for (let col = 0; col < cols; col++) {
+        const x = (col * STEP + STEP / 2) / W;
+        let re = 0, im = 0;
+        for (const s of sources) {
+          const dx = x - s.x, dy = y - s.y;
+          const r  = Math.sqrt(dx * dx + dy * dy);
+          if (r < 1e-4) continue;
+          const amp   = 1 / (0.3 + r * 1.8);
+          const phase = k * r - omega * t;
+          re += amp * Math.cos(phase);
+          im += amp * Math.sin(phase);
+        }
+        const prob = re * re + im * im;
+        vals[row * cols + col] = prob;
+        if (prob > frameMax) frameMax = prob;
+      }
     }
 
-    const path = pts => {
-      ctx.beginPath();
-      pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
-    };
+    // Smooth the running max so colours stay stable
+    runningMax += (frameMax - runningMax) * 0.05;
 
-    // |ψ|² fill
-    ctx.beginPath();
-    pTop.forEach(([x,y], i) => i ? ctx.lineTo(x,y) : ctx.moveTo(x,y));
-    for (let i = pBot.length - 1; i >= 0; i--) ctx.lineTo(...pBot[i]);
-    ctx.closePath();
-    ctx.fillStyle = `rgba(${rgb},${dark ? 0.10 : 0.06})`;
-    ctx.fill();
+    // Second pass — colorise pixels
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        // Gamma-correct for more visible mid-tones
+        const n = Math.pow(vals[row * cols + col] / runningMax, 0.55);
 
-    // |ψ|² outline
-    path(pTop);
-    ctx.strokeStyle = `rgba(${rgb},${dark ? 0.28 : 0.14})`;
-    ctx.lineWidth = 1;
-    ctx.stroke();
+        const r = Math.round(bgR + n * (hiR - bgR));
+        const g = Math.round(bgG + n * (hiG - bgG));
+        const b = Math.round(bgB + n * (hiB - bgB));
 
-    // Im(ψ) — dashed
-    ctx.setLineDash([3, 6]);
-    path(imP);
-    ctx.strokeStyle = `rgba(${rgb},${dark ? 0.42 : 0.22})`;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.setLineDash([]);
+        // Fill STEP×STEP block
+        for (let dy = 0; dy < STEP; dy++) {
+          const py = row * STEP + dy;
+          if (py >= H) break;
+          for (let dx = 0; dx < STEP; dx++) {
+            const px = col * STEP + dx;
+            if (px >= W) break;
+            const idx = (py * W + px) * 4;
+            d[idx]     = r;
+            d[idx + 1] = g;
+            d[idx + 2] = b;
+            d[idx + 3] = 255;
+          }
+        }
+      }
+    }
 
-    // Re(ψ) — solid
-    path(reP);
-    ctx.strokeStyle = `rgba(${rgb},${dark ? 0.88 : 0.62})`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    ctx.putImageData(imageData, 0, 0);
 
-    // Baseline (x-axis)
-    ctx.beginPath();
-    ctx.moveTo(0, yC);
-    ctx.lineTo(W, yC);
-    ctx.strokeStyle = dark ? 'rgba(232,224,208,0.07)' : 'rgba(14,17,23,0.07)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    // Labels
-    const fs = Math.max(10, W * 0.030);
+    // Label
+    const fs = Math.max(9, W * 0.028);
     ctx.font = `${fs}px 'Space Mono', monospace`;
+    ctx.fillStyle = dark ? 'rgba(140,190,255,0.45)' : 'rgba(26,61,143,0.30)';
+    ctx.fillText('|ψ(x,y,t)|²', W * 0.04, H * 0.07);
 
-    ctx.fillStyle = `rgba(${rgb},${dark ? 0.65 : 0.45})`;
-    ctx.fillText('Re(ψ)', W * 0.04, H * 0.08);
-
-    ctx.fillStyle = `rgba(${rgb},${dark ? 0.40 : 0.25})`;
-    ctx.fillText('Im(ψ)', W * 0.04, H * 0.14);
-
-    ctx.fillStyle = `rgba(${rgb},${dark ? 0.25 : 0.15})`;
-    ctx.fillText('|ψ|²',  W * 0.04, H * 0.20);
-
-    requestAnimationFrame(drawWavefunction);
+    requestAnimationFrame(drawWavefunction2D);
   }
 
-  requestAnimationFrame(drawWavefunction);
+  requestAnimationFrame(drawWavefunction2D);
 } // end canvas guard
 
 // ── READING PROGRESS BAR ──────────────────────────
