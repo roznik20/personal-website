@@ -2,7 +2,7 @@
   {
     "file": "DSF5827.jpg",
     "title": "",
-    "location": "",
+    "location": "Montreal",
     "date": "2026-03",
     "category": "day",
     "camera": "FUJIFILM X100VI",
@@ -11,10 +11,19 @@
   {
     "file": "DSF5838.jpg",
     "title": "",
-    "location": "",
+    "location": "Montreal",
     "date": "2026-03",
     "category": "day",
     "camera": "FUJIFILM X100VI",
     "exif": "23mm · f/3.2 · 1/180s · ISO 250"
+  },
+  {
+    "file": "manta.jpg",
+    "title": "",
+    "location": "Comodo Islands, Indonesia",
+    "date": "",
+    "category": "day",
+    "camera": "",
+    "exif": ""
   }
 ]
